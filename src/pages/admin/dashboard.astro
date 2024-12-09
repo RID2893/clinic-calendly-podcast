@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdminEpisodesList from '../../components/AdminEpisodesList.astro';
+import { isAuthenticated } from '../../stores/auth';
+
+if (!isAuthenticated.get()) {
+  return Astro.redirect('/admin/login');
+}
+---
+
+<Layout title="Admin Dashboard - CLINIC-CALENDLY">
+  <div class="min-h-screen bg-gray-100">
+    <nav class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <h1 class="text-xl font-semibold text-gray-900">Admin Dashboard</h1>
+          </div>
+          <div class="flex items-center">
+            <form action="/api/logout" method="POST">
+              <button type="submit" class="text-sm text-red-600 hover:text-red-800">
+                Logout
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow rounded-lg p-6">
+          <h2 class="text-lg font-medium text-gray-900 mb-4">Upload New Episode</h2>
+          <form action="/api/episodes" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <div>
+              <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-blue focus:ring-primary-blue sm:text-sm"
+              />
+            </div>
+            
+            <div>
+              <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+              <textarea
+                name="description"
+                id="description"
+                rows="3"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-blue focus:ring-primary-blue sm:text-sm"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="publishDate" class="block text-sm font-medium text-gray-700">Publish Date</label>
+              <input
+                type="date"
+                name="publishDate"
+                id="publishDate"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-blue focus:ring-primary-blue sm:text-sm"
+              />
+            </div>
+
+            <div>
+              <label for="audioFile" class="block text-sm font-medium text-gray-700">Audio File</label>
+              <input
+                type="file"
+                name="audioFile"
+                id="audioFile"
+                accept="audio/*"
+                required
+                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-blue file:text-white hover:file:bg-primary-blue/90"
+              />
+            </div>
+
+            <div class="flex justify-end">
+              <button
+                type="submit"
+                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-blue hover:bg-primary-blue/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-blue"
+              >
+                Upload Episode
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <AdminEpisodesList />
+      </div>
+    </div>
+  </div>
+</Layout>

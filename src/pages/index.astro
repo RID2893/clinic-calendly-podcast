@@ -1,0 +1,7 @@
+---
+import { currentLanguage } from '../stores/language';
+
+// Redirect to the appropriate language version
+const lang = currentLanguage.get();
+return Astro.redirect(`/${lang}`);
+---

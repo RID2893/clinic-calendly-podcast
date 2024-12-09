@@ -1,0 +1,14 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = "h-12" } = Astro.props;
+---
+
+<div class={`flex items-center ${className}`}>
+  <div class="text-[#6366F1] dark:text-[#818CF8]">
+    <span class="text-4xl font-light tracking-tight">Clinic</span>
+    <span class="text-[#EC4899] dark:text-[#F472B6] text-4xl font-medium ml-1">Calendly</span>
+  </div>
+</div>

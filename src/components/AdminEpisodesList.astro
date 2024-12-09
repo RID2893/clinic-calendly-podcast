@@ -1,0 +1,54 @@
+---
+import { translations, type Language } from '../stores/language';
+
+interface Episode {
+  title: string;
+  audioUrl: string;
+  description?: string;
+  publishDate: string;
+  duration: string;
+}
+
+const episodes = [
+  {
+    title: translations.en.aiHealthcare,
+    audioUrl: "/episodes/Clinic-Calendly_ Appointment Scheduling Solution 1er espisiodo.wav",
+    description: translations.en.episodeDescription,
+    publishDate: "Agosto 15, 2023",
+    duration: "25:30"
+  }
+];
+---
+
+<div class="mt-8 bg-white shadow rounded-lg p-6">
+  <h2 class="text-lg font-medium text-gray-900 mb-4">Uploaded Episodes</h2>
+  <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Title</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Publish Date</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Duration</th>
+          <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+            <span class="sr-only">Actions</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        {episodes.map((episode) => (
+          <tr>
+            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+              {episode.title}
+            </td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{episode.publishDate}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{episode.duration}</td>
+            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+              <button class="text-primary-blue hover:text-primary-blue/80 mr-4">Edit</button>
+              <button class="text-red-600 hover:text-red-800">Delete</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
